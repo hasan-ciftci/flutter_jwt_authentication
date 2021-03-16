@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:jwt_authentication/core/components/widgets/route_not_found_widget.dart';
 import 'package:jwt_authentication/core/constants/navigation_root_name_constants.dart';
-import 'package:jwt_authentication/view/authentication/login/view/home_view.dart';
 import 'package:jwt_authentication/view/authentication/login/view/login_view.dart';
+import 'package:jwt_authentication/view/home/view/home_view.dart';
 
 class NavigationRoutes {
   static NavigationRoutes _instance = NavigationRoutes._init();
