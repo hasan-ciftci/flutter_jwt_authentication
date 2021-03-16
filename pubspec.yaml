@@ -17,6 +17,7 @@ dependencies:
   json_serializable: ^4.0.2
   json_annotation: ^4.0.0
   build_runner: any
+  dio: ^4.0.0-beta7
 
 dev_dependencies:
   flutter_test:
