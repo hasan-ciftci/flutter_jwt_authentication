@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:jwt_authentication/view/authentication/login/model/login_model.dart';
 import 'package:jwt_authentication/view/authentication/login/service/login_service.dart';
 
-class LoginViewModel {
+class LoginViewModel extends ChangeNotifier {
   GlobalKey<FormState> formState = GlobalKey();
   GlobalKey<ScaffoldState> scaffoldState = GlobalKey();
 
@@ -19,9 +19,6 @@ class LoginViewModel {
   Future loginUser() async {
     final userModel = LoginModel(
         username: usernameController.text, password: passwordController.text);
-    final response = await _loginService.loginUser(userModel);
-    if (response != null) {
-      print(response);
-    }
+    await _loginService.loginUser(userModel);
   }
 }

@@ -9,6 +9,7 @@ class LoginView extends StatefulWidget {
 
 class _LoginViewState extends BaseState<LoginView> {
   late final LoginViewModel loginModelView;
+  bool isLoading = false;
 
   @override
   void initState() {
@@ -39,22 +40,35 @@ class _LoginViewState extends BaseState<LoginView> {
   Form buildForm() {
     return Form(
       key: loginModelView.formState,
-      child: Column(
-        children: [
-          buildTextFormFieldUsername(),
-          buildTextFormFieldPassword(),
-          buildElevatedButtonLogin()
-        ],
+      child: Padding(
+        padding: EdgeInsets.symmetric(horizontal: dynamicWidth(.05)),
+        child: Column(
+          children: [
+            buildTextFormFieldUsername(),
+            buildTextFormFieldPassword(),
+            buildElevatedButtonLogin()
+          ],
+        ),
       ),
     );
   }
 
   ElevatedButton buildElevatedButtonLogin() {
     return ElevatedButton(
-        onPressed: () {
-          loginModelView.loginUser();
-        },
-        child: Text("Giriş"));
+      onPressed: !isLoading
+          ? () async {
+              setState(() {
+                isLoading = !isLoading;
+              });
+              await loginModelView.loginUser();
+              setState(() {
+                isLoading = !isLoading;
+              });
+            }
+          : null,
+      child:
+          !isLoading ? buildNormalButtonContent() : buildLoadingButtonContent(),
+    );
   }
 
   TextFormField buildTextFormFieldPassword() {
@@ -66,6 +80,24 @@ class _LoginViewState extends BaseState<LoginView> {
   TextFormField buildTextFormFieldUsername() {
     return TextFormField(
       controller: loginModelView.usernameController,
+    );
+  }
+
+  FractionallySizedBox buildNormalButtonContent() {
+    return FractionallySizedBox(
+        widthFactor: 1, child: Center(child: Text("Giriş")));
+  }
+
+  Row buildLoadingButtonContent() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Text("Yükleniyor"),
+        SizedBox(
+          width: 5,
+        ),
+        SizedBox(height: 15, width: 15, child: CircularProgressIndicator()),
+      ],
     );
   }
 }

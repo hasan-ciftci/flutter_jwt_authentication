@@ -27,7 +27,6 @@ class NetworkManager {
     switch (response.statusCode) {
       case HttpStatus.ok:
         final responseBody = response.data;
-        //TODO: RESPONSE WILL BE HANDLED
         return responseBody;
       default:
     }
