@@ -73,6 +73,7 @@ class _LoginViewState extends BaseState<LoginView> {
 
   TextFormField buildTextFormFieldPassword() {
     return TextFormField(
+      obscureText: true,
       controller: loginModelView.passwordController,
     );
   }

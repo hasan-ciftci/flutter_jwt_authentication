@@ -1,4 +1,4 @@
-import 'package:jwt_authentication/view/authentication/login/model/jwt_user_model.dart';
+import 'package:jwt_authentication/view/home/model/jwt_user_model.dart';
 
 abstract class IJwtService {
   String? getTokenFromPreferences() {}
